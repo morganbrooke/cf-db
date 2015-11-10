@@ -1,0 +1,31 @@
+*{
+	font-weight: 300;
+	font-family: sans-serif;
+	color: #22796E;
+	background-color: #17232A;
+
+}
+fieldset{
+	border: 5px;
+	display: block;
+}
+select{
+	display: inline;
+}
+p, h3{
+	text-align: center;
+}
+
+.dropdown-content li:hover> span{
+	background-color: #081016;
+}
+#login{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.input-field .prefix.active {
+     color: #B9353B;
+}
+.label{
+	text-align: left;
+}
