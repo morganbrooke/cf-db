@@ -1,0 +1,62 @@
+{
+  "name": "pivotal-db-access-bridge",
+  "version": "0.0.1",
+  "description": "Pivotal db Access Bridge",
+  "main": "index.html",
+  "ng-admin-comment": "We still depend on the ng-admin for the css, bootstrap css in not included for the same reason. The javascript sources are not included.",
+  "ng-clip-comment": "Next version (i.e. current master) depends on jquery, also browsers are starting to disable flash by default.",
+  "ng-clip-comment2": "Better migrate to http://zenorocha.github.io/clipboard.js/ - no Safari support but has a nice fallback.",
+
+  "dependencies": {
+    "ng-admin": "marmelab/ng-admin#b36634e2d7bdedeaf2aa1e6ea80369705fcd6e5c",
+    "angular": "^1.3.18",
+    "angular-resource": "^1.3.18",
+    "angular-messages": "^1.3.18",
+    "angular-ui-router": "^0.2.15",
+    "angular-ui-select": "^0.12.100",
+    "angular-tooltips": "^0.1.23",
+    "humane-js": "^3.2.2",
+    "nprogress": "^0.2.0",
+    "zeroclipboard": "^2.2.0",
+    "ng-clip": "^0.2.6",
+    "js-yaml": "^3.4.2"
+  },
+  "private": true,
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.22",
+    "babel-loader": "^5.3.2",
+    "chance": "^0.7.6",
+    "css-loader": "^0.16.0",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "fakerest": "^1.0.8",
+    "file-loader": "^0.8.4",
+    "html-loader": "^0.3.0",
+    "md5": "^2.0.0",
+    "moment": "^2.10.6",
+    "node-sass": "^3.3.2",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^2.0.1",
+    "sinon": "ubervu/Sinon.JS",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.12.0",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "browser": true,
+      "mocha": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ],
+      "no-underscore-dangle": 1
+    }
+  }
+}

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
+
+    <context-param>
+        <param-name>resteasy.providers</param-name>
+        <param-value>
+            io.cloudsoft.pivotal.db.access.bridge.rest.server.CustomExceptionMapper
+        </param-value>
+    </context-param>
+
+    <!-- this need same with resteasy servlet url-pattern -->
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/api</param-value>
+    </context-param>
+
+    <!-- TODO replace for tomcat
+    <context-param>
+        <param-name>org.eclipse.jetty.servlet.SessionPath</param-name>
+        <param-value>/api/</param-value>
+    </context-param>
+    -->
+
+    <!-- Brooklyn endpoint -->
+    <context-param>
+        <param-name>brooklyn.endpoint</param-name>
+        <param-value>http://localhost:8081</param-value>
+    </context-param>
+
+    <!-- http connection pooling -->
+    <context-param>
+        <param-name>connection.pool.size</param-name>
+        <param-value>1000</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>connection.request.timeout</param-name>
+        <param-value>3000</param-value>
+    </context-param>
+
+    <!-- admin key pair for provisioned machines -->
+    <context-param>
+        <param-name>admin.public_key</param-name>
+        <param-value>~/.ssh/id_rsa.pub</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>admin.private_key</param-name>
+        <param-value>~/.ssh/id_rsa</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>resteasy-servlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>swagger</servlet-name>
+        <servlet-class>io.swagger.jaxrs.config.DefaultJaxrsConfig</servlet-class>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>1.0.0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>swagger.api.title</param-name>
+            <param-value>Swagger Server</param-value>
+        </init-param>
+        <init-param>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>http://localhost:8080</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>swagger</servlet-name>
+        <url-pattern>/swagger/*</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>ApiOriginFilter</filter-name>
+        <filter-class>io.cloudsoft.cisco.marketplace.onboarding.rest.server.ApiOriginWithCredentialsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ApiOriginFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+<!--
+    <filter>
+        <filter-name>FailureFilter</filter-name>
+        <filter-class>io.cloudsoft.cisco.marketplace.onboarding.rest.server.FailureTestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FailureFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+-->
+
+    <filter>
+        <filter-name>NoCacheFilter</filter-name>
+        <filter-class>io.cloudsoft.cisco.marketplace.onboarding.rest.server.NoCachingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>NoCacheFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>io.cloudsoft.cisco.marketplace.onboarding.rest.server.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+</web-app>

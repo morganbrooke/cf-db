@@ -1,0 +1,31 @@
+<html>
+    <head>
+		<meta charset="utf-8">
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
+        <div id ="edit_deails">
+	<div class = 'row'>
+		<h3>Enter the details for admin access to the DB you wish to make available through Cloud Foundry.</h3>
+		<p>Admin credentials are used only to create and delete users for the CF applications which are given access. CF applications will not have admin access to the database.</p>
+	<form action='/info' method='post'>
+        <!-- TODO add selection of dbtypes -->
+        <input type="hidden" name="dbtype" value="io.cloudsoft.dbaccess.MySqlDatabaseAccessEntity">
+		<p class="label">DB Access URL:
+		<input type='text' name='endpointUrl' required>
+		<p class="label">DB Admin Username:
+		<input type='text' name='username' required>
+		<p class="label">DBMS admin credentials:
+		<input type='text' name='password' required>
+		<p class="label">DB instance:
+		<input type="text" name="db" required>
+			<input type="submit" value="Add database">
+	</form>
+	</div>
+</div>
+    </body>
+</html>
